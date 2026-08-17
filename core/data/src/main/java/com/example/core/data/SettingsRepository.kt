@@ -3,6 +3,7 @@ package com.example.core.data
 import android.content.Context
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -10,8 +11,12 @@ import javax.inject.Singleton
 
 private val Context.dataStore by preferencesDataStore("settings")
 
+data class Settings(val baseUrl: String, val apiKey: String, val model: String)
+
 @Singleton
-class SettingsRepository @Inject constructor(private val context: Context) {
+class SettingsRepository @Inject constructor(
+    @ApplicationContext private val context: Context   // 添加 @ApplicationContext
+) {
     companion object {
         val BASE_URL = stringPreferencesKey("base_url")
         val API_KEY = stringPreferencesKey("api_key")
@@ -34,5 +39,3 @@ class SettingsRepository @Inject constructor(private val context: Context) {
         }
     }
 }
-
-data class Settings(val baseUrl: String, val apiKey: String, val model: String)
