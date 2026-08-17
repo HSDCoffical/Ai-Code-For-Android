@@ -14,5 +14,5 @@ dependencies {
     implementation(project(":core:network"))
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")  // 确保这一行在 dependencies 块内
+    add("kapt", "com.google.dagger:hilt-compiler:2.48")  // 关键修改
 }
