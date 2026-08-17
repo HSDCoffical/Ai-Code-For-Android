@@ -1,13 +1,15 @@
 plugins {
-    id("com.android.library")  // 改为 library
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
+
 android {
-    namespace = "com.example.feature.chat"  // 补充 namespace
+    namespace = "com.example.feature.chat"
     compileSdk = 34
 }
+
 dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:model"))
@@ -15,5 +17,5 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    add("kapt", "com.google.dagger:hilt-compiler:2.48")
 }
