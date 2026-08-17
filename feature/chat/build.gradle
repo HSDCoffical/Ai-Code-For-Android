@@ -17,6 +17,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    // 🔥 新增：启用 Compose
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.5.4'
+    }
 }
 
 dependencies {
@@ -27,6 +35,5 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
     implementation 'com.google.dagger:hilt-android:2.48'
     kapt 'com.google.dagger:hilt-compiler:2.48'
-    // 新增 Hilt Navigation Compose 依赖
     implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
 }
