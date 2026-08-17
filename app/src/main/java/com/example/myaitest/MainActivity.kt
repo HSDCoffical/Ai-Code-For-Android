@@ -1,16 +1,12 @@
 package com.example.myaitest
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,8 +20,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            AppContent()
+        try {
+            setContent {
+                AppContent()
+            }
+        } catch (e: Exception) {
+            // 捕获 setContent 异常
+            Toast.makeText(this, "启动失败: ${e.message}", Toast.LENGTH_LONG).show()
+            android.util.Log.e("MainActivity", "onCreate error", e)
+            // 显示错误界面（可选）
+            setContent {
+                Text("启动失败: ${e.message}")
+            }
         }
     }
 }
@@ -44,7 +50,7 @@ fun AppContent() {
                         NavigationBarItem(
                             selected = currentRoute == route,
                             onClick = { navController.navigate(route) },
-                            icon = { Text("") },  // 添加图标占位
+                            icon = { Text("") },
                             label = { Text(label) }
                         )
                     }
