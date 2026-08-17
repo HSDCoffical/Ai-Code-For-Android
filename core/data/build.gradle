@@ -20,14 +20,15 @@ android {
 }
 
 dependencies {
-    // 直接依赖 core/network
-    implementation project(':core:network')
+    // 关键：用 api 替代 implementation，确保 core/network 的类传递给 core/data
+    api project(':core:network')
     implementation project(':core:model')
+
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
     implementation 'com.google.dagger:hilt-android:2.48'
     kapt 'com.google.dagger:hilt-compiler:2.48'
 
-    // 显式添加网络库依赖（防止传递丢失）
+    // 网络库依赖（也显式添加，以防传递丢失）
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.11.0'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
