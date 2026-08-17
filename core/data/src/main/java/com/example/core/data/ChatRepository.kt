@@ -2,7 +2,7 @@ package com.example.core.data
 
 import com.example.core.model.ChatRequest
 import com.example.core.model.Message
-import com.example.core.network.ApiService
+import com.example.core.model.ApiService          // ✅ 改为从 model 导入
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.first
