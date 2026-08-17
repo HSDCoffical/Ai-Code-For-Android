@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.core.network'
+    namespace 'com.example.core.data'
     compileSdk 34
 
     compileOptions {
@@ -20,11 +20,16 @@ android {
 }
 
 dependencies {
+    // 直接依赖 core/network
+    implementation project(':core:network')
     implementation project(':core:model')
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+    implementation 'com.google.dagger:hilt-android:2.48'
+    kapt 'com.google.dagger:hilt-compiler:2.48'
+
+    // 显式添加网络库依赖（防止传递丢失）
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.11.0'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'com.squareup.moshi:moshi:1.15.0'
-    implementation 'com.google.dagger:hilt-android:2.48'
-    kapt 'com.google.dagger:hilt-compiler:2.48'
 }
