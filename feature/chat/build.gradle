@@ -9,7 +9,6 @@ android {
     namespace 'com.example.feature.chat'
     compileSdk 34
 
-    // 统一 JVM 版本为 17，解决 kapt 与 javac 冲突
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -28,4 +27,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
     implementation 'com.google.dagger:hilt-android:2.48'
     kapt 'com.google.dagger:hilt-compiler:2.48'
+    // 新增 Hilt Navigation Compose 依赖
+    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
 }
