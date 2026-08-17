@@ -5,10 +5,10 @@ import com.example.core.model.Message
 import com.example.core.network.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.first          // 必须导入
+import kotlinx.coroutines.flow.first
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory   // 必须导入
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class ChatRepository @Inject constructor(
     suspend fun getStreamingResponse(
         messages: List<Message>
     ): Flow<String> = flow {
-        val settings = settingsRepo.settingsFlow.first()   // 现在可解析
+        val settings = settingsRepo.settingsFlow.first()
         val client = OkHttpClient.Builder().build()
         val retrofit = Retrofit.Builder()
             .baseUrl(settings.baseUrl)
