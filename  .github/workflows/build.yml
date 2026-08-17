@@ -2,30 +2,43 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - master
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - master
+  # 支持手动触发（点一下就能跑）
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      
-    - name: Build Debug APK
-      run: ./gradlew :app:assembleDebug
-      
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 新增调试步骤：确认 workflow 文件是否存在且被识别
+      - name: Debug workflow files
+        run: |
+          ls -la .github/workflows/
+          pwd
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew :app:assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
