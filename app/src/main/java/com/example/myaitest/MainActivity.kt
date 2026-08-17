@@ -44,6 +44,7 @@ fun AppContent() {
                         NavigationBarItem(
                             selected = currentRoute == route,
                             onClick = { navController.navigate(route) },
+                            icon = { Text("") },  // 添加图标占位
                             label = { Text(label) }
                         )
                     }
