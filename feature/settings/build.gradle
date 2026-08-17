@@ -8,6 +8,16 @@ plugins {
 android {
     namespace 'com.example.feature.settings'
     compileSdk 34
+
+    // 统一 JVM 版本为 17，解决 kapt 与 javac 冲突
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {
