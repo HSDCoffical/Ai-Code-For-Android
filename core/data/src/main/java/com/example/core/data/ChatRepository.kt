@@ -5,8 +5,10 @@ import com.example.core.model.Message
 import com.example.core.network.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.first          // 必须导入
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory   // 必须导入
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
@@ -19,7 +21,7 @@ class ChatRepository @Inject constructor(
     suspend fun getStreamingResponse(
         messages: List<Message>
     ): Flow<String> = flow {
-        val settings = settingsRepo.settingsFlow.first() // 需导入 kotlinx.coroutines.flow.first
+        val settings = settingsRepo.settingsFlow.first()   // 现在可解析
         val client = OkHttpClient.Builder().build()
         val retrofit = Retrofit.Builder()
             .baseUrl(settings.baseUrl)
@@ -38,7 +40,6 @@ class ChatRepository @Inject constructor(
             if (raw.startsWith("data: ")) {
                 val data = raw.removePrefix("data: ")
                 if (data == "[DONE]") break
-                // 简易解析：提取 content
                 val content = extractContentFromJson(data)
                 if (content != null) emit(content)
             }
@@ -47,7 +48,6 @@ class ChatRepository @Inject constructor(
     }
 
     private fun extractContentFromJson(json: String): String? {
-        // 直接截取 "content":"xxx" 避免引入额外解析库依赖，也可用 Moshi
         val key = "\"content\":\""
         val start = json.indexOf(key)
         if (start == -1) return null
