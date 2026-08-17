@@ -17,6 +17,7 @@ allprojects {
         google()
         mavenCentral()
     }
+    // 统一所有 Kotlin 编译任务的 JVM 目标为 17
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions {
             jvmTarget = "17"
