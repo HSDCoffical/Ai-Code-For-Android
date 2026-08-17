@@ -17,7 +17,6 @@ android {
         versionName '1.0'
     }
 
-    // 👇 统一 Java 和 Kotlin 编译版本为 17
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -39,7 +38,17 @@ dependencies {
     implementation project(':feature:chat')
     implementation project(':feature:settings')
     implementation project(':core:data')
+
+    // Compose 依赖（app 模块直接使用 MaterialTheme 等）
+    implementation 'androidx.compose.ui:ui:1.6.0'
+    implementation 'androidx.compose.material3:material3:1.2.0'
+    implementation 'androidx.compose.ui:ui-tooling-preview:1.6.0'
+    implementation 'androidx.activity:activity-compose:1.8.0'
+
+    // Navigation
     implementation 'androidx.navigation:navigation-compose:2.7.6'
+
+    // Hilt
     implementation 'com.google.dagger:hilt-android:2.48'
     kapt 'com.google.dagger:hilt-compiler:2.48'
     implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
