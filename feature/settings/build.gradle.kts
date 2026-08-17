@@ -1,19 +1,17 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
 }
-
-android {
-    namespace 'com.example.feature.settings'
-    compileSdk 34
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
-
-dependencies {
-    implementation project(':core:data')
-    implementation 'androidx.compose.material3:material3:1.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
-    implementation 'com.google.dagger:hilt-android:2.48'
-    kapt 'com.google.dagger:hilt-compiler:2.48'
-}
+rootProject.name = "MyAIChat"
+include(":app")
+include(":core:model", ":core:network", ":core:data")
+include(":feature:chat", ":feature:settings")
