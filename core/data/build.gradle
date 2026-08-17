@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.core.data'
+    namespace 'com.example.core.network'
     compileSdk 34
 
     compileOptions {
@@ -21,14 +21,10 @@ android {
 
 dependencies {
     implementation project(':core:model')
-    implementation project(':core:network')
-    implementation 'androidx.datastore:datastore-preferences:1.0.0'
-    implementation 'com.google.dagger:hilt-android:2.48'
-    kapt 'com.google.dagger:hilt-compiler:2.48'
-
-    // 添加网络库依赖（与 core/network 保持一致）
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.11.0'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'com.squareup.moshi:moshi:1.15.0'
+    implementation 'com.google.dagger:hilt-android:2.48'
+    kapt 'com.google.dagger:hilt-compiler:2.48'
 }
