@@ -1,25 +1,40 @@
-package com.example.myaitest
+package com.example.myaitest;
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.sp
-import dagger.hilt.android.AndroidEntryPoint
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("应用启动成功！", fontSize = 24.sp)
-            }
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            // 显示一个简单的文本
+            TextView tv = new TextView(this);
+            tv.setText("Hello from Java!\n应用启动成功！");
+            tv.setTextSize(24);
+            tv.setGravity(android.view.Gravity.CENTER);
+            setContentView(tv);
+            Log.i(TAG, "onCreate: 启动成功");
+        } catch (Throwable e) {
+            // 捕获所有异常（包括Error）
+            Log.e(TAG, "onCreate: 启动失败", e);
+            // 显示Toast
+            Toast.makeText(this, "启动失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            // 显示AlertDialog
+            new AlertDialog.Builder(this)
+                    .setTitle("启动失败")
+                    .setMessage("错误信息: " + e.getMessage() + "\n\n详情请查看Logcat")
+                    .setPositiveButton("确定", null)
+                    .show();
+            // 重新抛出,让系统记录
+            throw new RuntimeException(e);
         }
     }
 }
