@@ -17,35 +17,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // 直接调用 Composable，不包裹 try-catch
-            SafeAppContent()
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("应用启动成功！", fontSize = 24.sp)
+            }
         }
-    }
-}
-
-@Composable
-fun SafeAppContent() {
-    try {
-        // 尝试加载正常界面
-        AppContent()
-    } catch (e: Exception) {
-        // 捕获异常显示错误（Composable 内部允许 try-catch）
-        android.util.Log.e("MainActivity", "Composable error", e)
-        ErrorScreen("启动错误: ${e.message}")
-    }
-}
-
-@Composable
-fun ErrorScreen(message: String) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = message, fontSize = 18.sp)
-    }
-}
-
-@Composable
-fun AppContent() {
-    // 简化版测试：显示“应用启动成功！”（如果这个能显示，说明环境正常）
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("应用启动成功！", fontSize = 24.sp)
     }
 }
