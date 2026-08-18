@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    // 移除 Kotlin 和 Hilt 插件，因为我们改用 Java
 }
 
 android {
@@ -22,7 +21,5 @@ android {
 }
 
 dependencies {
-    // 只保留最基本的 Android 依赖
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    // 如果需要，可以添加其他基本库，但现在先保持最少
 }
